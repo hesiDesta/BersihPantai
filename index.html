@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BersihPesisir — Edukasi & Laporan Sampah Bengkulu</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --maroon: #003B73;
+            --maroon-dark: #002B55;
+            --maroon-light: #336290;
+            --maroon-soft: #6497B1;
+            --brown: #6497B1;
+            --brown-light: #8EB7CD;
+            --brown-muted: #B3CDE0;
+            --cream: #F0F4F8;
+            --cream-dark: #E1E8ED;
+            --cream-deeper: #D2DCE4;
+            --cream-light: #F8FAFC;
+            --white: #FFFFFF;
+            --text-dark: #001A33;
+            --text-mid: #1A3A5A;
+            --text-muted: #4A6B8A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(0, 59, 115, 0.97);
+            backdrop-filter: blur(12px);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--cream);
+            letter-spacing: 0.02em;
+        }
+
+        .nav-logo span {
+            color: var(--brown-muted);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0;
+            list-style: none;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: rgba(245, 237, 216, 0.75);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            transition: color 0.2s;
+            border-radius: 6px;
+        }
+
+        .nav-links a:hover {
+            color: var(--cream);
+        }
+
+        .nav-cta {
+            background: var(--brown-muted);
+            color: var(--maroon-dark) !important;
+            font-weight: 600 !important;
+            padding: 0.45rem 1.1rem !important;
+            border-radius: 999px !important;
+            transition: background 0.2s !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--cream) !important;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--cream);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(160deg, rgba(0, 43, 85, 0.65) 0%, rgba(0, 59, 115, 0.55) 45%, rgba(100, 151, 177, 0.65) 100%), url('pantai.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            padding: 96px 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            background: rgba(196, 154, 114, 0.07);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -120px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(196, 154, 114, 0.15);
+            border: 1px solid rgba(196, 154, 114, 0.35);
+            color: var(--brown-muted);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 999px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--brown-muted);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.25rem);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.18;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.01em;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero h1 em {
+            color: var(--brown-muted);
+            font-style: normal;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--white);
+            line-height: 1.75;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--cream);
+            color: var(--maroon-dark);
+            padding: 0.8rem 1.75rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--cream);
+            padding: 0.8rem 1.75rem;
+            border-radius: 999px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: 1px solid rgba(245, 237, 216, 0.35);
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-outline:hover {
+            background: rgba(245, 237, 216, 0.1);
+            border-color: rgba(245, 237, 216, 0.6);
+        }
+
+        .hero-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .stat-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.875rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.25rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .stat-card .num {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--cream);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .stat-card .label {
+            font-size: 0.8rem;
+            color: rgba(245, 237, 216, 0.6);
+            line-height: 1.4;
+            font-weight: 300;
+        }
+
+        .stat-card .icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* SECTION STYLES */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--maroon);
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: var(--maroon-dark);
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+
+        .section-sub {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-weight: 300;
+            max-width: 600px;
+        }
+
+        /* ABOUT / MASALAH */
+        #masalah {
+            background: var(--cream-light);
+        }
+
+        .masalah-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+
+        .masalah-text p {
+            color: var(--text-mid);
+            line-height: 1.8;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box {
+            background: var(--maroon);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .highlight-box p {
+            color: rgba(245, 237, 216, 0.85) !important;
+            font-size: 0.9rem !important;
+            margin-bottom: 0 !important;
+        }
+
+        .highlight-box strong {
+            color: var(--cream) !important;
+        }
+
+        .pantai-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pantai-card {
+            background: var(--white);
+            border: 1px solid var(--cream-dark);
+            border-left: 4px solid var(--maroon);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            transition: all 0.25s;
+        }
+
+        .pantai-card:hover {
+            border-left-color: var(--brown);
+            transform: translateX(4px);
+            box-shadow: 0 4px 20px rgba(107, 26, 26, 0.08);
+        }
+
+        .pantai-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--maroon-dark);
+            margin-bottom: 0.4rem;
+        }
+
+        .pantai-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* EDUKASI */
+        #edukasi {
+            background: var(--cream);
+        }
+
+        .edukasi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .tab-nav {
+            display: flex;
+            background: var(--cream-light);
+            border: 1px solid var(--cream-dark);
+            border-radius: 999px;
+            padding: 4px;
+            gap: 2px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.45rem 1.1rem;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            background: var(--maroon);
+            color: var(--cream);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .jenis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .jenis-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.75rem;
+            border: 1px solid var(--cream-dark);
+            transition: all 0.25s;
+        }
+
+        .jenis-card:hover {
+            border-color: var(--brown-muted);
+            box-shadow: 0 8px 28px rgba(107, 26, 26, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .jenis-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: var(--cream);
+        }
+
+        .jenis-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: var(--maroon-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .jenis-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        .dampak-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .dampak-item {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            border: 1px solid var(--cream-dark);
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            transition: all 0.2s;
+        }
+
+        .dampak-item:hover {
+            border-color: var(--maroon-soft);
+            box-shadow: 0 4px 16px rgba(107, 26, 26, 0.06);
+        }
+
+        .dampak-num {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            background: var(--maroon);
+            color: var(--cream);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .dampak-item h4 {
+            font-weight: 600;
+            color: var(--maroon-dark);
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        .dampak-item p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .tip-card {
+            background: var(--maroon);
+            border-radius: 16px;
+            padding: 1.5rem;
+            color: var(--cream);
+            transition: all 0.25s;
+            border: 1px solid var(--maroon-light);
+        }
+
+        .tip-card:hover {
+            background: var(--maroon-light);
+            transform: translateY(-3px);
+        }
+
+        .tip-card .tip-icon {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .tip-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: var(--cream);
+        }
+
+        .tip-card p {
+            font-size: 0.8rem;
+            color: rgba(245, 237, 216, 0.72);
+            line-height: 1.6;
+        }
+
+        /* LAPORAN */
+        #laporan {
+            background: var(--cream-light);
+        }
+
+        .laporan-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label.form-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--maroon-dark);
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.02em;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border: 1.5px solid var(--cream-deeper);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+            transition: all 0.2s;
+            outline: none;
+            appearance: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--maroon-soft);
+            box-shadow: 0 0 0 3px rgba(107, 26, 26, 0.08);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.85rem;
+            background: var(--maroon);
+            color: var(--cream);
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: 'DM Sans', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--maroon-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(107, 26, 26, 0.2);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .reports-panel h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--maroon-dark);
+            margin-bottom: 1rem;
+        }
+
+        .reports-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.875rem;
+            max-height: 520px;
+            overflow-y: auto;
+        }
+
+        .report-item {
+            background: var(--white);
+            border: 1px solid var(--cream-dark);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            animation: slideIn 0.35s ease;
+            transition: all 0.2s;
+        }
+
+        .report-item:hover {
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--maroon-dark);
+        }
+
+        .report-date {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .report-loc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .report-type {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: rgba(107, 26, 26, 0.1);
+            color: var(--maroon);
+            margin-bottom: 0.5rem;
+        }
+
+        .report-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background: var(--white);
+            border-radius: 12px;
+            border: 1.5px dashed var(--cream-deeper);
+        }
+
+        .empty-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .success-toast {
+            display: none;
+            background: #2d7a3a;
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-top: 0.75rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        .success-toast.show {
+            display: block;
+        }
+
+        /* FITUR */
+        #fitur {
+            background: var(--maroon);
+        }
+
+        #fitur .section-label {
+            color: var(--brown-muted);
+        }
+
+        #fitur .section-title {
+            color: var(--cream);
+        }
+
+        .fitur-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-top: 3rem;
+        }
+
+        .fitur-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.25s;
+            cursor: default;
+        }
+
+        .fitur-card:hover {
+            background: rgba(255, 255, 255, 0.11);
+            transform: translateY(-3px);
+            border-color: rgba(196, 154, 114, 0.35);
+        }
+
+        .fitur-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .fitur-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .fitur-card p {
+            font-size: 0.83rem;
+            color: rgba(245, 237, 216, 0.62);
+            line-height: 1.65;
+        }
+
+
+        /* FOOTER */
+        footer {
+            background: var(--maroon-dark);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-logo span {
+            color: var(--brown-muted);
+        }
+
+        footer p {
+            font-size: 0.82rem;
+            color: rgba(245, 237, 216, 0.5);
+            line-height: 1.65;
+            margin-bottom: 0.4rem;
+        }
+
+        .footer-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--brown-muted);
+            margin: 1.5rem auto;
+            border-radius: 2px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: var(--maroon-dark);
+                padding: 1rem;
+                gap: 0.25rem;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .stat-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .masalah-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .laporan-inner {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            section {
+                padding: 3.5rem 1.25rem;
+            }
+
+            .edukasi-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stat-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero {
+                padding: 80px 1.25rem 3rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">Bersih<span>Pesisir</span></div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#masalah">Masalah</a></li>
+            <li><a href="#edukasi">Edukasi</a></li>
+            <li><a href="#fitur">Fitur</a></li>
+            <li><a href="#laporan" class="nav-cta">Laporkan Sampah</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <div class="hero-badge">Destinasi Wisata · Konservasi Lingkungan</div>
+                <h1>Pesona &amp; Pelestarian <em>Pantai Bengkulu</em></h1>
+                <p>Pantai Bengkulu adalah ikon keindahan pesisir dengan garis pantai yang panjang. Mari kita bersama-sama menjaga kebersihan dan kelestariannya dari ancaman sampah pesisir melalui edukasi dan tindakan nyata.</p>
+                <div class="hero-actions">
+                    <a href="#edukasi" class="btn-primary">Mulai Belajar</a>
+                    <a href="#laporan" class="btn-outline">Laporkan Sampah →</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="stat-cards">
+                    <div class="stat-card">
+                        <span class="icon"><i class="bi bi-water"></i></span>
+                        <span class="num">80%</span>
+                        <span class="label">Limbah laut berasal dari plastik</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="icon"><i class="bi bi-umbrella"></i></span>
+                        <span class="num">2+</span>
+                        <span class="label">Pantai terdampak di Bengkulu</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="icon"><i class="bi bi-droplet"></i></span>
+                        <span class="num">100k+</span>
+                        <span class="label">Biota laut terancam tiap tahun</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="icon"><i class="bi bi-recycle"></i></span>
+                        <span class="num">3</span>
+                        <span class="label">Fitur utama platform ini</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MASALAH -->
+    <section id="masalah">
+        <div class="container">
+            <div class="reveal">
+                <span class="section-label">Latar Belakang</span>
+                <h2 class="section-title">Kondisi Sampah Pesisir<br>di Provinsi Bengkulu</h2>
+            </div>
+            <div class="masalah-grid reveal">
+                <div class="masalah-text">
+                    <p>Sampah di kawasan pesisir Bengkulu masih menjadi persoalan lingkungan yang mengkhawatirkan dan
+                        belum menemukan penyelesaian menyeluruh. Sampah plastik mendominasi, berasal dari aktivitas
+                        sehari-hari dan terbawa aliran air dari daratan.</p>
+                    <p>Sampah plastik mencemari perairan laut, merusak habitat terumbu karang, dan mengancam biota laut.
+                        Dalam jangka panjang, plastik berubah menjadi mikroplastik yang menyusup ke rantai makanan dan
+                        membahayakan kesehatan manusia.</p>
+                    <div class="highlight-box">
+                        <p><strong>Penelitian Johan et al. (2024)</strong> mengungkapkan bahwa sampah anorganik —
+                            plastik, kaca, dan karet — mendominasi kawasan pesisir Bengkulu dan sangat lambat terurai di
+                            alam.</p>
+                    </div>
+                </div>
+                <div class="pantai-list">
+                    <div class="pantai-card">
+                        <h4><i class="bi bi-umbrella"></i> Pantai Panjang</h4>
+                        <p>Ikon pariwisata kebanggaan Bengkulu yang mengalami kemerosotan kualitas lingkungan akibat
+                            tumpukan sampah yang tidak kunjung ditangani secara tuntas.</p>
+                    </div>
+                    <div class="pantai-card">
+                        <h4><i class="bi bi-water"></i> Pantai Kualo</h4>
+                        <p>Kawasan pesisir yang secara konsisten ditemukan timbunan sampah anorganik berbagai jenis,
+                            mengganggu ekosistem laut dan kenyamanan pengunjung.</p>
+                    </div>
+                    <div class="pantai-card">
+                        <h4><i class="bi bi-globe-americas"></i> Dampak Ekosistem</h4>
+                        <p>Penurunan daya tarik wisata, gangguan aktivitas nelayan, dan ancaman rantai makanan melalui
+                            mikroplastik menjadi dampak nyata bagi masyarakat pesisir.</p>
+                    </div>
+                    <div class="pantai-card">
+                        <h4><i class="bi bi-people"></i> Mitra Proyek</h4>
+                        <p>Dinas Lingkungan Hidup Kota Bengkulu dan komunitas peduli lingkungan berperan sebagai
+                            pemangku kepentingan utama dalam proyek ini.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUKASI -->
+    <section id="edukasi">
+        <div class="container">
+            <div class="edukasi-header reveal">
+                <div>
+                    <span class="section-label">Halaman Edukasi</span>
+                    <h2 class="section-title">Kenali Lebih Dalam</h2>
+                </div>
+                <div class="tab-nav">
+                    <button class="tab-btn active" onclick="switchTab('jenis', this)">Jenis Sampah</button>
+                    <button class="tab-btn" onclick="switchTab('dampak', this)">Dampak</button>
+                    <button class="tab-btn" onclick="switchTab('tips', this)">Cara Menjaga</button>
+                </div>
+            </div>
+
+            <div class="tab-content active" id="tab-jenis">
+                <div class="jenis-grid">
+                    <div class="jenis-card reveal">
+                        <div class="jenis-icon"><i class="bi bi-cup-straw"></i></div>
+                        <h3>Plastik</h3>
+                        <p>Jenis sampah paling dominan di pesisir. Termasuk botol, kantong, sedotan, dan kemasan.
+                            Membutuhkan ratusan tahun untuk terurai.</p>
+                    </div>
+                    <div class="jenis-card reveal">
+                        <div class="jenis-icon"><i class="bi bi-trash"></i></div>
+                        <h3>Logam & Kaca</h3>
+                        <p>Kaleng minuman, botol kaca, dan limbah logam yang terbawa arus sungai dan bermuara di pantai,
+                            sulit terurai secara alami.</p>
+                    </div>
+                    <div class="jenis-card reveal">
+                        <div class="jenis-icon"><i class="bi bi-tree"></i></div>
+                        <h3>Organik</h3>
+                        <p>Sisa makanan, daun, dan kayu yang lebih cepat terurai namun dalam jumlah besar tetap
+                            mengganggu keseimbangan ekosistem pesisir.</p>
+                    </div>
+                    <div class="jenis-card reveal">
+                        <div class="jenis-icon"><i class="bi bi-tools"></i></div>
+                        <h3>Karet</h3>
+                        <p>Sandal, ban bekas, dan produk karet lainnya yang sering ditemukan di pesisir. Sulit terurai
+                            dan berbahaya bagi biota laut.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-dampak">
+                <div class="dampak-list">
+                    <div class="dampak-item reveal">
+                        <div class="dampak-num">01</div>
+                        <div>
+                            <h4>Kerusakan Terumbu Karang & Mangrove</h4>
+                            <p>Sampah plastik menghambat pertumbuhan terumbu karang dan mangrove — dua ekosistem vital
+                                di wilayah pesisir — yang berfungsi sebagai habitat dan pelindung pantai.</p>
+                        </div>
+                    </div>
+                    <div class="dampak-item reveal">
+                        <div class="dampak-num">02</div>
+                        <div>
+                            <h4>Ancaman terhadap Biota Laut</h4>
+                            <p>Ikan, penyu, dan burung laut secara tidak sengaja menelan atau terjerat sampah plastik,
+                                menyebabkan luka dan kematian pada ribuan satwa setiap tahunnya.</p>
+                        </div>
+                    </div>
+                    <div class="dampak-item reveal">
+                        <div class="dampak-num">03</div>
+                        <div>
+                            <h4>Mikroplastik dalam Rantai Makanan</h4>
+                            <p>Plastik terpecah menjadi partikel mikroplastik yang masuk ke tubuh biota laut dan pada
+                                akhirnya dikonsumsi manusia, berpotensi menimbulkan risiko kesehatan serius.</p>
+                        </div>
+                    </div>
+                    <div class="dampak-item reveal">
+                        <div class="dampak-num">04</div>
+                        <div>
+                            <h4>Kerugian Ekonomi Wisata & Nelayan</h4>
+                            <p>Menurunnya daya tarik wisata pantai dan terganggunya area tangkapan ikan berdampak
+                                langsung pada pendapatan masyarakat lokal dan sektor pariwisata daerah.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-tips">
+                <div class="tips-grid">
+                    <div class="tip-card reveal">
+                        <span class="tip-icon"><i class="bi bi-trash3-fill"></i></span>
+                        <h4>Buang Sampah pada Tempatnya</h4>
+                        <p>Biasakan membawa kantong sampah saat ke pantai dan buang di tempat yang disediakan.</p>
+                    </div>
+                    <div class="tip-card reveal">
+                        <span class="tip-icon"><i class="bi bi-bag"></i></span>
+                        <h4>Kurangi Plastik Sekali Pakai</h4>
+                        <p>Gunakan tas belanja kain, botol minum isi ulang, dan hindari sedotan plastik saat berwisata.
+                        </p>
+                    </div>
+                    <div class="tip-card reveal">
+                        <span class="tip-icon"><i class="bi bi-people-fill"></i></span>
+                        <h4>Ikuti Kegiatan Bersih Pantai</h4>
+                        <p>Berpartisipasi dalam aksi bersih pantai bersama komunitas lokal untuk dampak yang lebih
+                            besar.</p>
+                    </div>
+                    <div class="tip-card reveal">
+                        <span class="tip-icon"><i class="bi bi-megaphone-fill"></i></span>
+                        <h4>Laporkan Kondisi Lingkungan</h4>
+                        <p>Gunakan fitur laporan di website ini untuk melaporkan temuan sampah di kawasan pesisir.</p>
+                    </div>
+                    <div class="tip-card reveal">
+                        <span class="tip-icon"><i class="bi bi-book-half"></i></span>
+                        <h4>Edukasi Lingkungan Sekitar</h4>
+                        <p>Bagikan informasi tentang bahaya sampah plastik kepada keluarga, teman, dan komunitas Anda.
+                        </p>
+                    </div>
+                    <div class="tip-card reveal">
+                        <span class="tip-icon"><i class="bi bi-recycle"></i></span>
+                        <h4>Daur Ulang Sampah</h4>
+                        <p>Pisahkan sampah organik dan anorganik di rumah untuk memudahkan proses daur ulang.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FITUR -->
+    <section id="fitur">
+        <div class="container">
+            <div class="reveal">
+                <span class="section-label">Fitur Aplikasi</span>
+                <h2 class="section-title">Apa yang Ada di Platform Ini?</h2>
+            </div>
+            <div class="fitur-grid">
+                <div class="fitur-card reveal">
+                    <span class="fitur-icon"><i class="bi bi-house-door-fill"></i></span>
+                    <h4>Halaman Beranda</h4>
+                    <p>Tampilan awal yang menyajikan informasi umum seputar kondisi dan permasalahan sampah pesisir di
+                        Bengkulu secara ringkas dan menarik.</p>
+                </div>
+                <div class="fitur-card reveal">
+                    <span class="fitur-icon"><i class="bi bi-book-fill"></i></span>
+                    <h4>Halaman Edukasi</h4>
+                    <p>Konten edukatif mengenai jenis-jenis sampah, dampak terhadap lingkungan, dan panduan menjaga
+                        kebersihan pantai yang disajikan secara interaktif.</p>
+                </div>
+                <div class="fitur-card reveal">
+                    <span class="fitur-icon"><i class="bi bi-clipboard-data-fill"></i></span>
+                    <h4>Form Laporan Sampah</h4>
+                    <p>Formulir pelaporan yang memungkinkan masyarakat menginput data nama, lokasi, jenis sampah, dan
+                        deskripsi kondisi secara mudah.</p>
+                </div>
+                <div class="fitur-card reveal">
+                    <span class="fitur-icon"><i class="bi bi-bar-chart-fill"></i></span>
+                    <h4>Tampilan Data Laporan</h4>
+                    <p>Seluruh data laporan yang telah diinput ditampilkan secara langsung sehingga kondisi lingkungan
+                        pesisir dapat dipantau bersama.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LAPORAN -->
+    <section id="laporan">
+        <div class="container">
+            <div class="reveal">
+                <span class="section-label">Form Laporan</span>
+                <h2 class="section-title">Laporkan Sampah<br>yang Kamu Temukan</h2>
+                <p class="section-sub">Berpartisipasi aktif menjaga kebersihan pesisir Bengkulu dengan melaporkan
+                    kondisi sampah di sekitarmu.</p>
+            </div>
+            <div class="laporan-inner" style="margin-top: 3rem;">
+                <div class="reveal">
+                    <div class="form-group">
+                        <label class="form-label" for="namaInput">Nama Pelapor</label>
+                        <input type="text" id="namaInput" class="form-control" placeholder="Masukkan nama lengkap Anda">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="lokasiInput">Lokasi Ditemukan</label>
+                        <input type="text" id="lokasiInput" class="form-control"
+                            placeholder="Contoh: Pantai Panjang, Bengkulu">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="jenisInput">Jenis Sampah</label>
+                        <select id="jenisInput" class="form-control">
+                            <option value="">-- Pilih jenis sampah --</option>
+                            <option value="Plastik">Plastik (botol, kantong, sedotan)</option>
+                            <option value="Kaca">Kaca (botol, pecahan)</option>
+                            <option value="Logam">Logam (kaleng, besi)</option>
+                            <option value="Karet">Karet (ban, sandal)</option>
+                            <option value="Organik">Organik (sisa makanan, daun)</option>
+                            <option value="Campuran">Campuran (berbagai jenis)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="deskInput">Deskripsi Kondisi</label>
+                        <textarea id="deskInput" class="form-control"
+                            placeholder="Ceritakan kondisi sampah yang ditemukan, perkiraan jumlah, dll."></textarea>
+                    </div>
+                    <button class="submit-btn" onclick="submitReport()">Kirim Laporan →</button>
+                    <div class="success-toast" id="successToast"><i class="bi bi-check-circle-fill"></i> Laporan berhasil dikirim! Terima kasih atas
+                        partisipasimu.</div>
+                </div>
+
+                <div class="reports-panel reveal">
+                    <h3><i class="bi bi-clipboard-data"></i> Data Laporan Masuk</h3>
+                    <div class="reports-list" id="reportsList">
+                        <div class="empty-state">
+                            <span class="empty-icon"><i class="bi bi-water"></i></span>
+                            <p>Belum ada laporan yang masuk.<br>Jadilah yang pertama melaporkan!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">Bersih<span>Pesisir</span></div>
+        <p>Website Edukasi &amp; Sistem Laporan Sampah Pesisir</p>
+    </footer>
+
+    <script>
+        // NAV TOGGLE
+        document.getElementById('hamburger').addEventListener('click', function () {
+            document.getElementById('navLinks').classList.toggle('open');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(function (a) {
+            a.addEventListener('click', function () {
+                document.getElementById('navLinks').classList.remove('open');
+            });
+        });
+
+        // TAB SYSTEM
+        function switchTab(name, btn) {
+            document.querySelectorAll('.tab-content').forEach(function (t) { t.classList.remove('active'); });
+            document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+            document.getElementById('tab-' + name).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        // LAPORAN SYSTEM
+        var reports = [];
+
+        function submitReport() {
+            var nama = document.getElementById('namaInput').value.trim();
+            var lokasi = document.getElementById('lokasiInput').value.trim();
+            var jenis = document.getElementById('jenisInput').value;
+            var desk = document.getElementById('deskInput').value.trim();
+
+            if (!nama || !lokasi || !jenis || !desk) {
+                alert('Mohon lengkapi semua kolom sebelum mengirim laporan.');
+                return;
+            }
+
+            var now = new Date();
+            var dateStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+            reports.unshift({ nama: nama, lokasi: lokasi, jenis: jenis, desk: desk, date: dateStr });
+            renderReports();
+
+            document.getElementById('namaInput').value = '';
+            document.getElementById('lokasiInput').value = '';
+            document.getElementById('jenisInput').value = '';
+            document.getElementById('deskInput').value = '';
+
+            var toast = document.getElementById('successToast');
+            toast.classList.add('show');
+            setTimeout(function () { toast.classList.remove('show'); }, 3500);
+        }
+
+        function renderReports() {
+            var list = document.getElementById('reportsList');
+            if (reports.length === 0) {
+                list.innerHTML = '<div class="empty-state"><span class="empty-icon"><i class="bi bi-water"></i></span><p>Belum ada laporan yang masuk.<br>Jadilah yang pertama melaporkan!</p></div>';
+                return;
+            }
+            list.innerHTML = reports.map(function (r) {
+                return '<div class="report-item">' +
+                    '<div class="report-header"><span class="report-name">' + escHtml(r.nama) + '</span><span class="report-date">' + r.date + '</span></div>' +
+                    '<div class="report-loc"><i class="bi bi-geo-alt-fill"></i> ' + escHtml(r.lokasi) + '</div>' +
+                    '<span class="report-type">' + escHtml(r.jenis) + '</span>' +
+                    '<div class="report-desc">' + escHtml(r.desk) + '</div>' +
+                    '</div>';
+            }).join('');
+        }
+
+        function escHtml(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        // SCROLL REVEAL
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) { e.target.classList.add('visible'); }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+
+        // SMOOTH NAV HIGHLIGHT
+        window.addEventListener('scroll', function () {
+            var nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.2)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
